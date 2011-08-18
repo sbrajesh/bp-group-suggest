@@ -4,7 +4,7 @@
  * Author: Brajesh Singh 
  * Plugin URI: http://buddydev.com/plugins/bp-groups-suggest/
  * Author URI: http://buddydev.com
- * Version:1.0
+ * Version:1.0.1
  * License:GPL
  * Description: Simple Group suggestion widget based on friends Groups 
  * Special thanks to @GWU for the idea of this widget
@@ -101,7 +101,7 @@ class BPDevBPGroupSuggest{
         //
         //if we find and output individual group trough stanndard way,m that will be too many quesries, let us find it in a single query
         $list="(".join(',',$possible_groups).")";
-        $query=$wpdb->prepare("SELECT * from {$bp->groups->table_name} WHERE id in {$list}");
+        $query=$wpdb->prepare("SELECT * FROM {$bp->groups->table_name} WHERE id IN {$list}");
         
         $groups=$wpdb->get_results($query);
         shuffle($groups);//shuffle it
@@ -111,6 +111,7 @@ class BPDevBPGroupSuggest{
                             <li>
                                <?php $group_link= bp_get_group_permalink($group);
                                      $group_name=  $group->name;
+                                     $group->is_member=false;
 
                                 ?>
                                 <div class="item-avatar">

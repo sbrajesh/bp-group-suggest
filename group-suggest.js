@@ -24,7 +24,42 @@ return false;
 //send request to server for not showing this group again in suggestion
 //j.post();
 });
+/*taken from bp-default/_inc/global.js for ajaxified processing of group join request,sorry it won't work because the way bp handles group request processing*/
+/*var jq=jQuery;
+jq("ul.suggested-group-item-list div.group-button a").live('click', function() {
+    
+			
+		var gid = jq(this).parent().attr('id');
+		gid = gid.split('-');
+		gid = gid[1];
 
+		var nonce = jq(this).attr('href');
+		nonce = nonce.split('?_wpnonce=');
+		nonce = nonce[1].split('&');
+		nonce = nonce[0];
+
+		var thelink = jq(this);
+
+		jq.post( ajaxurl, {
+			action: 'joinleave_group',
+			'cookie': encodeURIComponent(document.cookie),
+			'gid': gid,
+			'_wpnonce': nonce
+		},
+		function(response)
+		{
+			var parentdiv = thelink.parent();
+
+			
+				jq(parentdiv).fadeOut(200,
+					function() {
+						parentdiv.fadeIn(200).html(response);
+					}
+				);
+			
+		});
+		return false;
+	} );*/
 //helper
 function get_var_in_url(url,name){
     var urla=url.split("?");
