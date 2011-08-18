@@ -4,7 +4,7 @@
  * Author: Brajesh Singh 
  * Plugin URI: http://buddydev.com/plugins/bp-groups-suggest/
  * Author URI: http://buddydev.com
- * Version:1.0.1
+ * Version: 1.0.1
  * License:GPL
  * Description: Simple Group suggestion widget based on friends Groups 
  * Special thanks to @GWU for the idea of this widget
