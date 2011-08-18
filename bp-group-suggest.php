@@ -18,9 +18,9 @@ class BPDevBPGroupSuggest{
     private function __construct(){
      
         //load script
-        add_action("wp_print_scripts",array(&$this,'load_js'));
+        add_action('wp_print_scripts',array(&$this,'load_js'));
         //ajax handling of hiding the suggestion
-        add_action("wp_ajax_group_suggest_remove_suggestion",array(&$this,'hide_suggestion'));
+        add_action('wp_ajax_group_suggest_remove_suggestion',array(&$this,'hide_suggestion'));
         
         //load text domain
         add_action ( 'bp_loaded', array(&$this,'load_textdomain'), 2 );
@@ -223,12 +223,12 @@ class BPDevGroupSuggestionWidget extends WP_Widget{
         ?>
         <p>
                 <label for="bp-groups-suggest-widget-title"><?php _e( 'Title' , 'bp-group-suggest'); ?>
-                        <input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" class="widefat" value="<?php echo attribute_escape( $title ); ?>" />
+                    <input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" class="widefat" value="<?php echo esc_attr( $title ); ?>" />
                 </label>
         </p>
         <p>
             <label for="bp-show-groups-widget-per-page"><?php _e( 'Max Number of suggestions:', 'bp-group-suggest' ); ?>
-                    <input class="widefat" id="<?php echo $this->get_field_id( 'max' ); ?>" name="<?php echo $this->get_field_name( 'max' ); ?>" type="text" value="<?php echo attribute_escape( $max ); ?>" style="width: 30%" />
+                    <input class="widefat" id="<?php echo $this->get_field_id( 'max' ); ?>" name="<?php echo $this->get_field_name( 'max' ); ?>" type="text" value="<?php echo esc_attr( $max ); ?>" style="width: 30%" />
             </label>
         </p>
 <?php }     
@@ -239,7 +239,7 @@ function group_suggest_register_widget(){
   add_action('widgets_init', create_function('', 'return register_widget("BPDevGroupSuggestionWidget");') );
   
 }
-add_action("bp_loaded","group_suggest_register_widget");
+add_action('bp_loaded','group_suggest_register_widget');
 
  
  //initialize
