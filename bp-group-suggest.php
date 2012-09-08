@@ -4,7 +4,7 @@
  * Author: Brajesh Singh 
  * Plugin URI: http://buddydev.com/plugins/bp-groups-suggest/
  * Author URI: http://buddydev.com
- * Version: 1.0.1
+ * Version: 1.0.2
  * License:GPL
  * Description: Simple Group suggestion widget based on friends Groups 
  * Special thanks to @GWU for the idea of this widget
@@ -30,7 +30,7 @@ class BPDevBPGroupSuggest{
     function get_instance(){
         
         if(!isset (self::$instance))
-                self::$instance=new BPDevBPGroupSuggest();
+                self::$instance=new self();
         return self::$instance;
     }
    
@@ -47,11 +47,14 @@ class BPDevBPGroupSuggest{
              return;
          
         global $bp;
-        $user_id=$bp->loggedin_user->id;
+        $user_id=bp_loggedin_user_id();
         $excluded=get_user_meta($user_id,"hidden_group_suggestions" ,true);
         $excluded=(array)($excluded);
         $excluded[]=$suggestion_id;
+        
         update_user_meta($user_id,"hidden_group_suggestions",$excluded);
+        
+        exit(0);
    }
   //get the hidden group ids as an array, yep u read it right
    function get_hidden($user_id=null){
@@ -64,7 +67,7 @@ class BPDevBPGroupSuggest{
        global $bp,$wpdb;
        
        if(!$user_id)
-	$user_id = $bp->loggedin_user->id;
+	$user_id = bp_loggedin_user_id();
        
        //who are the friends of current user, let us have their ids as array
         $my_friends=(array)friends_get_friend_user_ids($user_id);//get all friend ids
