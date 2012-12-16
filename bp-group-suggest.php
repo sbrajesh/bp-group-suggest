@@ -4,8 +4,9 @@
  * Author: Brajesh Singh 
  * Plugin URI: http://buddydev.com/plugins/bp-groups-suggest/
  * Author URI: http://buddydev.com
- * Version: 1.0.2
+ * Version: 1.0.3
  * License:GPL
+ * Last Updated: December 15, 2012
  * Description: Simple Group suggestion widget based on friends Groups 
  * Special thanks to @GWU for the idea of this widget
  */
@@ -75,7 +76,7 @@ class BPDevBPGroupSuggest{
         //find friend's groups of the user
         $friends_list="(".join(",",$my_friends).")";
        
-        $friends_groups_sql= $wpdb->prepare( "SELECT DISTINCT group_id FROM  {$bp->groups->table_name} g, {$bp->groups->table_name_members} m WHERE g.id=m.group_id AND g.status='public' AND m.user_id in {$friends_list} AND is_confirmed= 1"); 
+        $friends_groups_sql=  "SELECT DISTINCT group_id FROM  {$bp->groups->table_name} g, {$bp->groups->table_name_members} m WHERE g.id=m.group_id AND g.status='public' AND m.user_id in {$friends_list} AND is_confirmed= 1"; 
         $friends_groups=$wpdb->get_col($friends_groups_sql);
         
        
@@ -104,7 +105,7 @@ class BPDevBPGroupSuggest{
         //
         //if we find and output individual group trough stanndard way,m that will be too many quesries, let us find it in a single query
         $list="(".join(',',$possible_groups).")";
-        $query=$wpdb->prepare("SELECT * FROM {$bp->groups->table_name} WHERE id IN {$list}");
+        $query="SELECT * FROM {$bp->groups->table_name} WHERE id IN {$list}";
         
         $groups=$wpdb->get_results($query);
         shuffle($groups);//shuffle it
